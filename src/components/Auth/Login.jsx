@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useState } from "react";
+import { Loader } from "../Loader";
 
-export const Login = ({ fireAction }) => {
-  const [email, setEmail] = useState();
+export const Login = ({ fireAction, isLoading }) => {
+  const [phone, setPhone] = useState();
   const [password, setPassword] = useState();
 
   const fireFormData = (e) => {
     e.preventDefault();
     fireAction({
-      email,
+      phone: phone.replace(/ /g, ""),
       password,
     });
   };
@@ -17,32 +17,8 @@ export const Login = ({ fireAction }) => {
     setPassword(e.target.value);
   };
 
-  const changeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const ads = gql`
-    {
-      advertisements {
-        data {
-          items {
-            id
-            title
-            description
-            store {
-              id
-              name
-            }
-          }
-        }
-      }
-    }
-  `;
-
-  const { data, loading, error } = useQuery(ads);
-
-  const fetchAds = () => {
-    console.log("fetch");
+  const changePhone = (e) => {
+    setPhone(e.target.value);
   };
 
   return (
@@ -53,8 +29,8 @@ export const Login = ({ fireAction }) => {
           className="form-control mb-2"
           type="text"
           placeholder="Email.."
-          onChange={changeEmail}
-          defaultValue={email}
+          onChange={changePhone}
+          defaultValue={phone}
         />
         <input
           className="form-control mb-2"
@@ -64,19 +40,16 @@ export const Login = ({ fireAction }) => {
           defaultValue={password}
         />
         <button className="btn btn-primary" onClick={fireFormData}>
-          Login
+          <div className="d-flex justify-content-center align-items-center">
+            {!isLoading && <span>Login</span>}
+            {isLoading && <Loader color="white" />}
+          </div>
         </button>
       </form>
-      <button
-        className="btn btn-danger btn-block w-100 mt-5"
-        onClick={fetchAds}
-      >
-        Fetch Ads
-      </button>
-      <div>
-        {loading && <p>Loading...</p>}
-        {!loading && <pre className="pt-3">{JSON.stringify(data)}</pre>}
-      </div>
     </>
   );
+};
+
+Login.defaultProps = {
+  isLoading: false,
 };

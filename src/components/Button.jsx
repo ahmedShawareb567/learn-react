@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-import { useRef, useEffect, useReducer } from "react";
 
 export const Button = ({ clickFn, label }) => {
   const worker = new Worker("../workers/index.js");

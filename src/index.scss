@@ -1,4 +1,5 @@
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "bootstrap/scss/bootstrap";
+@import "react-toastify/dist/ReactToastify.css";
 
 body {
   margin: 0;
@@ -7,4 +8,49 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.pre {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  text-align: left;
+  background-color: #06283d;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.profile {
+  text-align: center;
+  &-image {
+    margin: 1rem auto;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.loader {
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  border: 0.15rem solid rgba(0, 0, 0, 0.1);
+  border-bottom-color: red;
+  margin: 0rem auto;
+  animation: spin 0.5s linear infinite;
+  &.white {
+    border-bottom-color: #fff;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }
