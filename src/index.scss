@@ -1,5 +1,6 @@
 @import "bootstrap/scss/bootstrap";
 @import "react-toastify/dist/ReactToastify.css";
+@import "react-phone-input-2/lib/style.css";
 
 body {
   margin: 0;
@@ -52,5 +53,13 @@ body {
 @keyframes spin {
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.react-tel-input {
+  text-align: left;
+  .form-control {
+    width: 100%;
+    height: 38px;
   }
 }

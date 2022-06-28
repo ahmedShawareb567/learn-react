@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Loader } from "../Loader";
+import PhoneInput from "react-phone-input-2";
 
 export const Login = ({ fireAction, isLoading }) => {
   const [phone, setPhone] = useState();
@@ -8,7 +9,7 @@ export const Login = ({ fireAction, isLoading }) => {
   const fireFormData = (e) => {
     e.preventDefault();
     fireAction({
-      phone: phone.replace(/ /g, ""),
+      phone: `+${phone.replace(/ /g, "")}`,
       password,
     });
   };
@@ -17,20 +18,19 @@ export const Login = ({ fireAction, isLoading }) => {
     setPassword(e.target.value);
   };
 
-  const changePhone = (e) => {
-    setPhone(e.target.value);
+  const changePhone = (value) => {
+    setPhone(value);
   };
 
   return (
     <>
-      <h3 className="pt-5">Login</h3>
+      <h3 className="pt-5 mb-4">Login</h3>
       <form>
-        <input
-          className="form-control mb-2"
-          type="text"
-          placeholder="Email.."
+        <PhoneInput
+          country={"eg"}
+          value={phone}
           onChange={changePhone}
-          defaultValue={phone}
+          className="mb-2"
         />
         <input
           className="form-control mb-2"
